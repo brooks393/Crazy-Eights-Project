@@ -42,6 +42,7 @@ bool Player::isEmpty()
 	return this->hand.empty();
 }
 
+
 Card Player::getCard(int index)
 {
 	//Temporary variable must be created to return object after deleting card from vector.

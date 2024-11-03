@@ -14,65 +14,27 @@ using namespace std;
 class Player
 {
 private:
-	/**
-	 * Name of the player playing. Private, so must be accessed through indirectly through functions.
-	 */
-	string name;
-	/**
-	 * Player's hand. Stored as a vector of Card objects. Private, so must be accessed through indirectly through functions.
-	 */
-	vector<Card> hand;
-	/**
-	 * Player's score. Changes to score must be made using the changeScoreBy, setScore, and getScore functions.
-	 */
-	int score;
+
+	string name; //Name of the player playing.
+	vector<Card> hand;//Player's hand.
+	int score;//Players score
 
 public:
-	/**
-	 * Constructor to create a Player. Sets player name to "Unamed Player", hand starts empty, and score starts at 0.
-	 */
-	Player();
-	/**
-	 * Gets the player's name.
-	 * \return The name of the player.
-	 */
-	string getName();
 
-	/**
-	 * Sets the player's name.
-	 * \param new_name The new name of the player, as a string.
-	 */
-	void setName(string new_name);
-	/**
-	 * Gets the number of cards in the player's hand.
-	 * \return the size of hand.
-	 */
-	int getHandSize();
-	/**
-	 * Gets the entire hand of the player.
-	 * \return The vector containing Card objects.
-	 */
-	vector<Card> getHand();
-	/**
-	 * Clears the player's hand. Removes all cards from the player's hand permanently.
-	 */
-	void clearHand();
-	/**
-	 * Returns true/false depending on whether there are any cards in the player's hand.
-	 * \return boolean flag of if the player's hand is empty.
-	 */
+	Player();//Constructor to create a Player. Sets player name to "Unamed Player", hand starts empty, and score starts at 0.
+	string getName();//Gets the player's name.
+	void setName(string new_name);//Sets the player's name.
+	int getHandSize(); //Gets the number of cards in the player's hand. Returns size
+	vector<Card> getHand();//Gets the entire hand of the player.return The vector containing Card objects.
+	void clearHand();//Clears the player's hand. Removes all cards from the player's hand permanently.
 	bool isEmpty();
-
-
 	/**
 	 * Returns the card at the given index. Important to note is the card will not be removed from the player's hand.
-	 * \param index The index of the desired card.
 	 * \return Card object of the card at the given index.
 	 */
 	Card peekCard(int index);
 	/**
-	 * Removes and returns the card at the given index. Important to note is the card will be removed from the player's hand.
-	 * \param index The index of the desired card.
+	 * Removes and returns the card at the given index. Important to note is the card will be removed from the player's hand..
 	 * \return Card object of the card at the given index.
 	 */
 	Card getCard(int index);
