@@ -28,5 +28,14 @@ void Card::setSuit(string new_suit)
 
 string Card::toString()
 {
+	if (this->rank == 11) {
+		return "Jack of " + this->getSuit();
+	}
+	if (this->rank == 12) {
+		return "Queen of " + this->getSuit();
+	}
+	if (this->rank == 13) {
+		return "King of " + this->getSuit();
+	}
 	return to_string(this->rank) + " of " + this->getSuit();
 }

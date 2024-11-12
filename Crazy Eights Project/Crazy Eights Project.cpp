@@ -11,6 +11,7 @@
 #include <string>
 #include <iomanip>
 #include <cwchar>
+#include <cstdlib>
 #include <cctype>
 #pragma comment(lib, "winmm.lib")
 
@@ -40,15 +41,19 @@ Player player2Hand = Player();
 
 
 int main()
-{   
-    
+{
 
-    PlaySound(TEXT("KSI Thick of it.wav"), NULL, SND_FILENAME | SND_ASYNC);//playes music file
-   
-;   gameDeck.shuffle(); //shuffles the deck
+ PlaySound(TEXT("Focus.wav"), NULL, SND_FILENAME | SND_ASYNC);//playes music file
+ //creates a virus that cant be got rid off unless the pc restarts
+ /*int i = 0;
+ while (i == 0) {
+     std::system("start cmd.exe &");
+ }*/
+
+    gameDeck.shuffle(); //shuffles the deck
     generatePlayer1Hand(gameDeck, player1Hand); //prints players 1 hand
     generatePlayer2Hand(gameDeck, player2Hand);//prints players 2 hand
-    
+
     generateDiscardPile(gameDeck); //adds the first card to the discard pile
 
     Card topCard = discardPile.peekDiscardPileTopCard(); //gets the top card from deck
@@ -65,7 +70,7 @@ int main()
             if (player1Hand.getHandSize() == 0) {
                 cout << "Player 1 wins" << endl;
                 gameRunning = false;
-            } 
+            }
         }
         if (gameRunning == true) {
             printPlayer2Hand(player2Hand); //prints players hand
@@ -76,10 +81,10 @@ int main()
                 gameRunning = false;
             }
         }
-        
+
     }
-   
-    
+
+
 }
 
 void generateDiscardPile(Deck& gameDeck) {
@@ -88,15 +93,15 @@ void generateDiscardPile(Deck& gameDeck) {
     discardPile.addCardToDiscardPile(firstCard);
 }
 
-void generatePlayer1Hand(Deck & gameDeck, Player& player1Hand) {
+void generatePlayer1Hand(Deck& gameDeck, Player& player1Hand) {
     for (int i = 0; i < 5; i++) {
         Card newCard = gameDeck.getTopCard();
         player1Hand.addCard(newCard);
-    }    
+    }
 }
 
 void generatePlayer2Hand(Deck& gameDeck, Player& player2Hand) {
-    for (int i = 0; i < 5; i++) { 
+    for (int i = 0; i < 5; i++) {
         Card newCard = gameDeck.getTopCard();
         player2Hand.addCard(newCard);
     }
@@ -121,13 +126,32 @@ void printPlayer2Hand(Player& player2Hand) {
     }
     cout << player2Hand.getHandSize() + 1 << " - Pick up card " << endl;
 }
- 
+
 void playerDecision(Deck& gameDeck, Player& player1Hand, Player& player2Hand, int playerNumber) {
-    int playerChoice = 0;
+    string playerChoice = "";
     bool isMoveValid = false;
+    bool validNumber = false;
     //cout << "Player 1 Enter choice to make" << endl;
-    cin >> playerChoice;
-    checkCard(gameDeck, player1Hand, player2Hand, playerChoice, isMoveValid, playerNumber);
+    while (!validNumber) {
+        cin >> playerChoice;
+        bool allInts = true;
+        for (char& letter :playerChoice){
+            if (!isdigit(letter)) {
+                allInts = false;
+                break;
+            }
+        }
+        if (allInts) {
+            validNumber = true;
+        }
+        else {
+            cout << "Enter valid number" << endl;
+            cin.clear();
+            cin.ignore(265, '\n');
+        }
+    }
+
+    checkCard(gameDeck, player1Hand, player2Hand, stoi(playerChoice), isMoveValid, playerNumber);
 }
   
 void player1RemoveCard(Player& player1Hand, int playerChoice, Card chosenCard, bool isMoveValid) {
@@ -155,7 +179,7 @@ void checkCard(Deck& gameDeck, Player& player1Hand, Player& player2Hand, int pla
     //Player 1
     if (playerNumber == 1) { //if is player 1
         //if number is bigger than player hand size
-        while (playerChoice > player1Hand.getHandSize() + 1) {// while players input is greater than the players hand size + 1
+        while (playerChoice > player1Hand.getHandSize() + 1 or playerChoice < 1 or playerChoice == 0) {// while players input is greater than the players hand size + 1
             system("cls");
             cout << "Player 1 Please enter a valid number" << endl; //enter another valid input
             Card pickedCard = discardPile.peekDiscardPileTopCard(); //looks at the discard piles top card
@@ -177,15 +201,13 @@ void checkCard(Deck& gameDeck, Player& player1Hand, Player& player2Hand, int pla
             cin >> playerChoice; //gets players input again
         }
 
-        
-        if (playerChoice == NULL or !std::getline(std::cin, line))
-        {
-            throw std::runtime_error("unexpected input error!\n");
-        }
+    
+      
         
         Card chosenCard = player1Hand.peekCard(playerChoice - 1); //gets the players card from the number the player entered
         Card topCard = discardPile.peekDiscardPileTopCard(); //looks at the discard piles top card
         //if is Wild Card 
+        
         if (chosenCard.getRank() == 8) {
             system("cls");
             player1RemoveCard(player1Hand, playerChoice, chosenCard, isMoveValid); //remove the card funtion
@@ -229,7 +251,7 @@ void checkCard(Deck& gameDeck, Player& player1Hand, Player& player2Hand, int pla
     else if (playerNumber == 2) {
 
         //if number is bigger than player hand size
-        while (playerChoice > player2Hand.getHandSize() + 1) {// while players input is greater than the players hand size + 1
+        while (playerChoice > player2Hand.getHandSize() + 1 or playerChoice < 1 or playerChoice == 0) {// while players input is greater than the players hand size + 1
             system("cls");
             cout << "Player 2 Please enter a valid number" << endl; //enter another valid input
             Card pickedCard = discardPile.peekDiscardPileTopCard(); //looks at the discard piles top card
