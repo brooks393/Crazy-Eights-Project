@@ -10,10 +10,7 @@ Deck::Deck()
 	srand(time(0));
 }
 
-void Deck::generateHand()
-{
 
-}
 
 int Deck::getSize()
 {

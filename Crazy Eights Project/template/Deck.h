@@ -12,12 +12,11 @@ using namespace std;
 class Deck
 {
 private:
-	vector<Card> deck_vector;
-	vector<Card> discard_pile;
+	vector<Card> deck_vector; //Deck Vector
+	vector<Card> discard_pile; //Discard Pile Vector
 public:
 	
 	Deck(); //Constructor to make a new deck. Pre-fills the deck with ordered cards by default.
-	void generateHand();
 	int getSize();//Gets the size of the deck + returns number of cards in deck
 	bool isEmpty();//Returns true/false depending on whether there are any cards in the deck.return boolean flag of if the deck is empty.
 	void shuffle();//Shuffles the deck into a pseudo-random order. 
