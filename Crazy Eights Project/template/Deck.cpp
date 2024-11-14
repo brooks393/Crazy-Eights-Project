@@ -5,7 +5,7 @@
 
 Deck::Deck()
 {
-	this->deck_vector = {};
+	this->deckVector = {};
 	this->fillDeck();
 	srand(time(0));
 }
@@ -14,82 +14,82 @@ Deck::Deck()
 
 int Deck::getSize()
 {
-	return this->deck_vector.size();
+	return this->deckVector.size();
 }
 
 bool Deck::isEmpty()
 {
-	return this->deck_vector.empty();
+	return this->deckVector.empty();
 }
 
 void Deck::shuffle()
 {
-	random_shuffle(begin(this->deck_vector), end(this->deck_vector));
+	random_shuffle(begin(this->deckVector), end(this->deckVector));
 }
 
 void Deck::clear()
 {
-	this->deck_vector.clear();
+	this->deckVector.clear();
 }
 
 void Deck::fillDeck()
 {
 	//Iterates through all 13 cards for each suit separately.
 	for (int i = 1; i < 14; i++) {
-		Card n_card = Card(i, "Clubs");
-		this->deck_vector.push_back(n_card);
+		Card nCard = Card(i, "Clubs");
+		this->deckVector.push_back(nCard);
 	}
 
 	for (int i = 1; i < 14; i++) {
-		Card n_card = Card(i, "Hearts");
-		this->deck_vector.push_back(n_card);
+		Card nCard = Card(i, "Hearts");
+		this->deckVector.push_back(nCard);
 	}
 
 	for (int i = 1; i < 14; i++) {
-		Card n_card = Card(i, "Diamonds");
-		this->deck_vector.push_back(n_card);
+		Card nCard = Card(i, "Diamonds");
+		this->deckVector.push_back(nCard);
 	}
 
 	for (int i = 1; i < 14; i++) {
-		Card n_card = Card(i, "Spades");
-		this->deck_vector.push_back(n_card);
+		Card nCard = Card(i, "Spades");
+		this->deckVector.push_back(nCard);
 	}
 
 }
 
 void Deck::addCard(Card new_card)
 {
-	this->deck_vector.push_back(new_card);
+	this->deckVector.push_back(new_card);
 }
 
 Card Deck::peekCard(int index)
 {
-	return this->deck_vector[index];
+	return this->deckVector[index];
 }
 
 Card Deck::peekTopCard()
 {
-	int top_card_index = this->getSize() - 1;
-	return this->peekCard(top_card_index);
+	int topCardIndex = this->getSize() - 1;
+	return this->peekCard(topCardIndex);
 }
 
 Card Deck::getCard(int index)
 {
 	//Temporary variable must be created to return object after deleting card from vector.
-	Card tmp_card = this->deck_vector[this->getSize() - 1];
-	this->deck_vector.erase(this->deck_vector.begin() + index);
-	return tmp_card;
+	Card tmpCard = this->deckVector[this->getSize() - 1];
+	this->deckVector.erase(this->deckVector.begin() + index);
+	return tmpCard;
 }
 
 void Deck::removeCard(int index)
 {
-	this->deck_vector.erase(this->deck_vector.begin() + index);
+	this->deckVector.erase(this->deckVector.begin() + index);
 }
 
 void Deck::printDeck()
 {
-	for (int i = 0; i < deck_vector.size(); i++) {
-		Card card = deck_vector[i];
+	for (int i = 0; i < deckVector.size(); i++) {
+		Card card = deckVector[i];
 		std::cout << i + 1 << " - ";
 		Deck::getCard(i);
 		std::cout << std::endl;
@@ -98,53 +98,53 @@ void Deck::printDeck()
 
 Card Deck::peekLastCard()
 {
-	int last_card_index = this->getSize() - this->getSize() + 1;
-	return this->peekCard(last_card_index);
+	int lastCardIndex = this->getSize() - this->getSize() + 1;
+	return this->peekCard(lastCardIndex);
 }
 
 Card Deck::getLastCard()
 {
-	int top_card_index = this->getSize() - this->getSize() + 1;
-	return this->getCard(top_card_index);
+	int topCardIndex = this->getSize() - this->getSize() + 1;
+	return this->getCard(topCardIndex);
 }
 
 Card Deck::getDiscardPileCard(int index)
 {
-	Card tmp_card = this->discard_pile[this->getSize() - 1];
-	this->discard_pile.erase(this->discard_pile.begin() + index);
-	return tmp_card;
+	Card tmpCard = this->discardPile[this->getSize() - 1];
+	this->discardPile.erase(this->discardPile.begin() + index);
+	return tmpCard;
 }
 
 Card Deck::getDiscardPileTopCard()
 {
-	int top_card_index = this->getSize() - 1;
-	return this->getDiscardPileCard(top_card_index);
+	int topCardIndex = this->getSize() - 1;
+	return this->getDiscardPileCard(topCardIndex);
 }
 
 Card Deck::peekDiscardPileCard(int index)
 {
-	return this->discard_pile[index];
+	return this->discardPile[index];
 }
 
 Card Deck::peekDiscardPileTopCard()
 {
-	int top_card_index = this->getDiscardPileSize() - 1;
-	return this->peekDiscardPileCard(top_card_index);
+	int topCardIndex = this->getDiscardPileSize() - 1;
+	return this->peekDiscardPileCard(topCardIndex);
 }
 
 void Deck::addCardToDiscardPile(Card new_card)
 {
-	this->discard_pile.push_back(new_card);
+	this->discardPile.push_back(new_card);
 }
 
 int Deck::getDiscardPileSize()
 {
-	return this->discard_pile.size();
+	return this->discardPile.size();
 }
 
 
 Card Deck::getTopCard()
 {
-	int top_card_index = this->getSize() - 1;
-	return this->getCard(top_card_index);
+	int topCardIndex = this->getSize() - 1;
+	return this->getCard(topCardIndex);
 }

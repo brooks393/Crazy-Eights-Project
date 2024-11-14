@@ -1,9 +1,9 @@
 #include "Card.h"
 
-Card::Card(int init_rank, string init_suit)
+Card::Card(int initRank, string newSuit)
 {
-	this->rank = init_rank;
-	this->suit = init_suit;
+	this->rank = initRank;
+	this->suit = newSuit;
 }
 
 int Card::getRank()
@@ -16,14 +16,14 @@ string Card::getSuit()
 	return this->suit;
 }
 
-void Card::setRank(int new_rank)
+void Card::setRank(int newRank)
 {
-	this->rank = new_rank;
+	this->rank = newRank;
 }
 
-void Card::setSuit(string new_suit)
+void Card::setSuit(string newSuit)
 {
-	this->suit = new_suit;
+	this->suit = newSuit;
 }
 
 string Card::toString()

@@ -12,8 +12,8 @@ using namespace std;
 class Deck
 {
 private:
-	vector<Card> deck_vector; //Deck Vector
-	vector<Card> discard_pile; //Discard Pile Vector
+	vector<Card> deckVector; //Deck Vector
+	vector<Card> discardPile; //Discard Pile Vector
 public:
 	
 	Deck(); //Constructor to make a new deck. Pre-fills the deck with ordered cards by default.
@@ -22,7 +22,7 @@ public:
 	void shuffle();//Shuffles the deck into a pseudo-random order. 
 	void clear();//Removes all cards from the deck.
 	void fillDeck();//Fills the deck with all 52 cards. Does not shuffle the deck.
-	void addCard(Card new_card); //Adds a new card to the deck. Card is placed at the back of the deck vector. param new_card New card object to be added to the deck.
+	void addCard(Card newCard); //Adds a new card to the deck. Card is placed at the back of the deck vector. param new_card New card object to be added to the deck.
 	Card peekTopCard();//Returns the card at the top of deck. Will return the last card in the vector and will not be removed from the deck.
 	Card peekCard(int index); //Returns the card at the given index. Card will not be removed from the deck. Param index The index of the desired card.return Card object of the card at the given index.
 	Card getTopCard();//Removes and returns the card at the top of the deck. Will return the last card in the vector and will be removed from the deck.
@@ -36,7 +36,7 @@ public:
 	Card getDiscardPileTopCard();
 	Card peekDiscardPileCard(int index);
 	Card peekDiscardPileTopCard();
-	void addCardToDiscardPile(Card new_card);
+	void addCardToDiscardPile(Card newCard);
 	int getDiscardPileSize();
 };
 

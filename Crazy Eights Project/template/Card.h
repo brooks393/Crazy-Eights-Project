@@ -25,7 +25,7 @@ public:
 	 * \param init_rank An initial rank, as an integer (A=1, 2=2,... J=11, Q=12, K=13)
 	 * \param init_suit An initial suit, given as a string
 	 */
-	Card(int init_rank, string init_suit);
+	Card(int initRank, string initSuit);
 
 	/**
 	 * Get the card's rank.
@@ -43,13 +43,13 @@ public:
 	 * Set a new rank for the card.
 	 * \param new_rank An integer of the new card rank.
 	 */
-	void setRank(int new_rank);
+	void setRank(int newRank);
 	/**
 	 * Set a new suit for the card.
 	 * 
 	 * \param new_suit A string of the new card suit.
 	 */
-	void setSuit(string new_suit);
+	void setSuit(string newSuit);
 
 	/**
 	 * Get a string representation of the card.

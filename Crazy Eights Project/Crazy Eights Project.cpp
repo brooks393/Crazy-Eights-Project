@@ -43,12 +43,7 @@ Player player2Hand = Player();
 int main()
 {
 
- PlaySound(TEXT("Focus.wav"), NULL, SND_FILENAME | SND_ASYNC);//playes music file
- //creates a virus that cant be got rid off unless the pc restarts
- /*int i = 0;
- while (i == 0) {
-     std::system("start cmd.exe &");
- }*/
+    PlaySound(TEXT("Undertale OST.WAV"), NULL, SND_FILENAME | SND_ASYNC);//playes music file
 
     gameDeck.shuffle(); //shuffles the deck
     generatePlayer1Hand(gameDeck, player1Hand); //prints players 1 hand
@@ -62,6 +57,7 @@ int main()
     int playerNumber = 0;
     int discardPile_pointer = 0;
     bool gameRunning = true;
+    //this keeps the game running until a player has an empty vector
     while (player1Hand.getHandSize() > 0 or player2Hand.getHandSize() > 0 and gameRunning == true) {
         if (gameRunning == true) {
             printPlayer1Hand(player1Hand); //prints players hand
@@ -81,10 +77,7 @@ int main()
                 gameRunning = false;
             }
         }
-
     }
-
-
 }
 
 void generateDiscardPile(Deck& gameDeck) {
@@ -106,7 +99,7 @@ void generatePlayer2Hand(Deck& gameDeck, Player& player2Hand) {
         player2Hand.addCard(newCard);
     }
 }
-
+//prints players 1 hand
 void printPlayer1Hand(Player& player1Hand) {
     cout << "\nPlayer 1's Hand" << endl;
     for (int i = 0; i < player1Hand.getHandSize(); i++) {
@@ -116,7 +109,7 @@ void printPlayer1Hand(Player& player1Hand) {
     }
     cout << player1Hand.getHandSize() + 1 << " - Pick up card " << endl;
 }
-
+//prints players 2 hand
 void printPlayer2Hand(Player& player2Hand) {
     cout << "\nPlayer 2's Hand" << endl;
     for (int i = 0; i < player2Hand.getHandSize(); i++) {
@@ -127,6 +120,8 @@ void printPlayer2Hand(Player& player2Hand) {
     cout << player2Hand.getHandSize() + 1 << " - Pick up card " << endl;
 }
 
+//this is where the players decision gets captured and goes through a checking condition that checks if the inputted string 
+// has any numbers, if there are integers it moves onto the next funtion that checks which card they wanted
 void playerDecision(Deck& gameDeck, Player& player1Hand, Player& player2Hand, int playerNumber) {
     string playerChoice = "";
     bool isMoveValid = false;
@@ -149,11 +144,13 @@ void playerDecision(Deck& gameDeck, Player& player1Hand, Player& player2Hand, in
             cin.clear();
             cin.ignore(265, '\n');
         }
+        cin.clear();
+        cin.ignore(265, '\n');
     }
-
     checkCard(gameDeck, player1Hand, player2Hand, stoi(playerChoice), isMoveValid, playerNumber);
 }
-  
+ 
+//removes the players card and outputs the top deck
 void player1RemoveCard(Player& player1Hand, int playerChoice, Card chosenCard, bool isMoveValid) {
     player1Hand.removeCard(playerChoice - 1); //removes the card the player wants to lay
     discardPile.addCardToDiscardPile(chosenCard); //adds the card to the discard pile
@@ -162,6 +159,7 @@ void player1RemoveCard(Player& player1Hand, int playerChoice, Card chosenCard, b
     isMoveValid = true;
 }
 
+//removes the players card and outputs the top deck
 void player2RemoveCard( Player& player2Hand, int playerChoice, Card chosen_card, bool isMoveValid) {
     player2Hand.removeCard(playerChoice - 1); //removes the card the player wants to lay
     discardPile.addCardToDiscardPile(chosen_card); //adds the card to the discard pile
@@ -170,12 +168,9 @@ void player2RemoveCard( Player& player2Hand, int playerChoice, Card chosen_card,
     isMoveValid = true;
 }
 
-//checks card suit, rank and wild + picking up cards 
+//checks card suit, rank and wild and picking up cards 
 void checkCard(Deck& gameDeck, Player& player1Hand, Player& player2Hand, int playerChoice, bool isMoveValid, int playerNumber)
 {
-    string line;
-    size_t pos;
-
     //Player 1
     if (playerNumber == 1) { //if is player 1
         //if number is bigger than player hand size
@@ -197,17 +192,13 @@ void checkCard(Deck& gameDeck, Player& player1Hand, Player& player2Hand, int pla
             cout << "Top card is " << pickedCard.toString() << endl;//outputs the discard piles top card
             printPlayer1Hand(player1Hand); //prints the players hand and passes the new player hand into it
             deckPointer = deckPointer + 1; //increments the deck pointer by 1
-            cout << "deck has " << gameDeck.getSize() << " cards left" << endl; //prints the size of the deck to check that cards are being removed
+            cout << "\ndeck has " << gameDeck.getSize() << " cards left" << endl; //prints the size of the deck to check that cards are being removed
             cin >> playerChoice; //gets players input again
         }
-
-    
-      
-        
         Card chosenCard = player1Hand.peekCard(playerChoice - 1); //gets the players card from the number the player entered
         Card topCard = discardPile.peekDiscardPileTopCard(); //looks at the discard piles top card
+
         //if is Wild Card 
-        
         if (chosenCard.getRank() == 8) {
             system("cls");
             player1RemoveCard(player1Hand, playerChoice, chosenCard, isMoveValid); //remove the card funtion
@@ -270,7 +261,7 @@ void checkCard(Deck& gameDeck, Player& player1Hand, Player& player2Hand, int pla
             cout << "Top card is " << pickedCard.toString() << endl;//outputs the discard piles top card
             printPlayer2Hand(player2Hand); //prints the players hand and passes the new player hand into it
             deckPointer = deckPointer + 1; //increments the deck pointer by 1
-            cout << "deck has " << gameDeck.getSize() << " cards left" << endl; //prints the size of the deck to check that cards are being removed
+            cout << "\ndeck has " << gameDeck.getSize() << " cards left" << endl; //prints the size of the deck to check that cards are being removed
             cin >> playerChoice; //gets players input again
         }
 
